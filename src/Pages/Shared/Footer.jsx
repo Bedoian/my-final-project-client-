@@ -6,7 +6,7 @@ const Footer = () => {
         <div>
             <div>
                 <div className='flex'>
-                    <div className="bg-[#1F2937] py-12  text-center text-white w-1/2">
+                    <div className="bg-[#1F2937] py-20  text-center text-white w-1/2">
                         <div className='relative left-16'>
                             <h1 className='text-xl font-semibold mb-3'>CONTACT US</h1>
                             <div className='text-sm'>
@@ -17,7 +17,7 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-1/2 text-white  py-12  bg-[#111827]">
+                    <div className="w-1/2 text-white  py-20  bg-[#111827]">
                         <div className='relative right-36'>
                             <p className='text-xl text-center'>Follow US</p>
                             <p className='text-sm text-center my-4'>Join us on social media</p>
