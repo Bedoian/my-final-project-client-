@@ -1,11 +1,19 @@
-import { useState } from "react";
-import icon from '../../assets/icon/icon.png'
-import { NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+import icon from '../../assets/others/icons8-cart-48.png'
+import { NavLink } from "react-router-dom"
+import { AuthContext } from "../../Provider/AuthProvider";
+import useCart from "../../hooks/useCart";
 const Nav = () => {
+    const { user, logOut } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
+    const [cart] = useCart()
+    const hanldeLogOut = () => {
+        logOut()
+            .then(res => console.log(res))
+    }
     return (
-        <div>
-            <nav className="w-full max-w-screen-2xl z-10 bg-opacity-30  text-white bg-black h-[90px] items-center fixed">
+        <div className="">
+            <nav className="w-[1280px] z-10 bg-opacity-30  text-white bg-black h-[90px] items-center fixed">
                 <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
                     <div className="flex items-center justify-between">
                         <div>
@@ -40,32 +48,49 @@ const Nav = () => {
                     >
                         <div className="flex text-xl flex-col md:flex-row md:mx-6">
                             <NavLink to={'/'}
-                                className={({isActive})=>` ${isActive?'text-yellow-400':''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
+                                className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
                             >
                                 HOME
                             </NavLink>
                             <NavLink to={'/contract'}
-                                className={({isActive})=>` ${isActive?'text-yellow-400':''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
+                                className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
                             >
                                 CONTRACT US
                             </NavLink>
                             <NavLink to={'/dashboard'}
-                                className={({isActive})=>` ${isActive?'text-yellow-400':''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
+                                className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
                             >
                                 DASHBOARD
                             </NavLink>
                             <NavLink to={'/menu'}
-                                className={({isActive})=>` ${isActive?'text-yellow-400':''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
+                                className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
                             >
-                               OUR MENU
+                                OUR MENU
                             </NavLink>
-                            <NavLink to={'/order'}
-                                className={({isActive})=>` ${isActive?'text-yellow-400':''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
+                            <NavLink to={'/order/salad'}
+                                className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
                             >
-                               OUR SHOP
+                                OUR SHOP
                             </NavLink>
-                            
-                            <img className="w-10 h-10" src={icon} alt="" />
+                            <div >
+                                <NavLink to='/dashboard  '>
+                                    <div className="flex">
+                                        <img className="w-10 h-10 relative  bottom-1" src={icon} alt="" />
+                                        <span className="badge relative right-1 badge-secondary">
+                                            +{cart.length}
+                                        </span>
+                                    </div>
+                                </NavLink>
+                            </div>
+                            {
+                                user ? < button className="lg:relative bottom-1 left-2" onClick={hanldeLogOut} to={'/login'}>
+                                    SIGN OUT
+                                </button> : <NavLink to={'/login'}
+                                    className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
+                                >
+                                    SIGN IN
+                                </NavLink>
+                            }
                         </div>
                         <div className="flex justify-center md:block">
                         </div>

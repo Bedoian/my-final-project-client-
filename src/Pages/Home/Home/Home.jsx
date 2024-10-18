@@ -1,7 +1,6 @@
 import Feature from "../../../Components/Feature/Feature";
 import Carosel from "../Banner/Carosel";
 import Swiping from "../cards/Swiping";
-import Footer from '../../Shared/Footer'
 import Testimonial from "../Testimonial/Testimonial";
 import { Helmet } from "react-helmet-async";
 import PopularMenu from '../../../Components/Menu/PopularMenu'
@@ -20,7 +19,6 @@ const Home = () => {
             <div className="mb-10">
                 <Testimonial></Testimonial>
             </div>
-            <Footer></Footer>
         </div>
     );
 };
