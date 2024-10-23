@@ -1,16 +1,19 @@
-import { useContext, useState } from "react";
 import icon from '../../assets/others/icons8-cart-48.png'
 import { NavLink } from "react-router-dom"
-import { AuthContext } from "../../Provider/AuthProvider";
 import useCart from "../../hooks/useCart";
+import useAuth from "../../hooks/useAuth";
+import { useState } from 'react';
+import useAdmin from '../../hooks/useAdmin';
 const Nav = () => {
-    const { user, logOut } = useContext(AuthContext)
+    const { user, logOut } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
     const [cart] = useCart()
+    const [isAdmin] = useAdmin()
     const hanldeLogOut = () => {
         logOut()
             .then(res => console.log(res))
     }
+
     return (
         <div className="">
             <nav className="w-[1280px] z-10 bg-opacity-30  text-white bg-black h-[90px] items-center fixed">
@@ -57,11 +60,21 @@ const Nav = () => {
                             >
                                 CONTRACT US
                             </NavLink>
-                            <NavLink to={'/dashboard'}
-                                className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
-                            >
-                                DASHBOARD
-                            </NavLink>
+                            {/* dashboard starts */}
+                            {
+                                user && isAdmin ? <NavLink to={'/dashboard/adminHome'}
+                                    className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
+                                >
+                                    DASHBOARD
+                                </NavLink> :
+                                    <NavLink to={'/dashboard/userHome'}
+                                        className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
+                                    >
+                                        DASHBOARD
+                                    </NavLink>
+                            }
+
+                            {/* dashboard ends */}
                             <NavLink to={'/menu'}
                                 className={({ isActive }) => ` ${isActive ? 'text-yellow-400' : ''} my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0`}
                             >
@@ -73,7 +86,7 @@ const Nav = () => {
                                 OUR SHOP
                             </NavLink>
                             <div >
-                                <NavLink to='/dashboard  '>
+                                <NavLink to='/dashboard/cart'>
                                     <div className="flex">
                                         <img className="w-10 h-10 relative  bottom-1" src={icon} alt="" />
                                         <span className="badge relative right-1 badge-secondary">

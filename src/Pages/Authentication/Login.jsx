@@ -1,13 +1,10 @@
-
 import './style.css'
 import img1 from '../../assets/others/authentication2.png'
-import fb from '../../assets/icon/icons8-facebook-50.png'
-import google from '../../assets/icon/icons8-google-48.png'
-import git from '../../assets/icon/icons8-github-50.png'
 import { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast'
+import Social from './Social'
 const Login = () => {
     const { signIn } = useContext(AuthContext)
     const navigate=useNavigate()
@@ -31,11 +28,11 @@ const Login = () => {
 
     return (
         <div id="login" className="min-h-screen  flex lg:flex-row flex-col">
-            <div className='w-1/2 lg:pt-32'>
+            <div className='lg:block hidden w-1/2 lg:pt-32'>
                 <img src={img1} alt="" />
             </div>
-            <div className='w-1/2'>
-                <div className='mx-20'>
+            <div className=' lg:w-1/2'>
+                <div className='lg:mx-20'>
                     <h1 className='text-center text-3xl mt-16 font-bold relative top-9'>Login</h1>
                     <form onSubmit={handleLogin} className="card-body">
                         <div className="form-control">
@@ -64,14 +61,7 @@ const Login = () => {
                             <button className="btn btn-primary border-none bg-[#D1A054] rounded-none  text-white text-xl uppercase">Sign IN </button>
                         </div>
                         <p className='text-center text-lg text-[#D1A054]'>New here?<Link className='link-hover' to='/signUp'>Create a new account</Link></p>
-                        <p className='text-lg text-black text-center font-semibold'>Or sign in with</p>
-                        <div className='flex justify-center lg:relative bottom-2 mt-5'>
-                            <div className='flex gap-10'>
-                                <img className='h-8 w-8 border-2 border-black rounded-full p-1 cursor-pointer  ' src={fb} alt="" />
-                                <img className='h-8 w-8 border-2 border-black rounded-full p-1' src={google} alt="" />
-                                <img className='h-8 w-8 border-2 border-black rounded-full p-1' src={git} alt="" />
-                            </div>
-                        </div>
+                       <Social></Social>
                     </form>
                 </div>
             </div>
